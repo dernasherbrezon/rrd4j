@@ -1,22 +1,7 @@
 package org.rrd4j.core;
 
-import org.rrd4j.core.timespec.TimeParser;
-import org.rrd4j.core.timespec.TimeSpec;
-import org.rrd4j.ConsolFun;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.ErrorHandler;
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
-import org.xml.sax.SAXParseException;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import java.awt.*;
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.net.JarURLConnection;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -26,8 +11,14 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 import java.util.regex.Pattern;
+
+import org.rrd4j.ConsolFun;
+import org.rrd4j.core.timespec.TimeParser;
+import org.rrd4j.core.timespec.TimeSpec;
 
 /**
  * Class defines various utility functions used in Rrd4j.
@@ -344,31 +335,6 @@ public class Util {
     }
 
     /**
-     * Parses input string as color. The color string should be of the form #RRGGBB (no alpha specified,
-     * opaque color) or #RRGGBBAA (alpa specified, transparent colors). Leading character '#' is
-     * optional.
-     *
-     * @param valueStr Input string, for example #FFAA24, #AABBCC33, 010203 or ABC13E4F
-     * @return Paint object
-     * @throws java.lang.IllegalArgumentException If the input string is not 6 or 8 characters long (without optional '#')
-     */
-    public static Paint parseColor(String valueStr) {
-        String c = valueStr.startsWith("#") ? valueStr.substring(1) : valueStr;
-        if (c.length() != 6 && c.length() != 8) {
-            throw new IllegalArgumentException("Invalid color specification: " + valueStr);
-        }
-        String r = c.substring(0, 2), g = c.substring(2, 4), b = c.substring(4, 6);
-        if (c.length() == 6) {
-            return new Color(Integer.parseInt(r, 16), Integer.parseInt(g, 16), Integer.parseInt(b, 16));
-        }
-        else {
-            String a = c.substring(6);
-            return new Color(Integer.parseInt(r, 16), Integer.parseInt(g, 16),
-                    Integer.parseInt(b, 16), Integer.parseInt(a, 16));
-        }
-    }
-
-    /**
      * Returns file system separator string.
      *
      * @return File system separator ("/" on Unix, "\" on Windows)
@@ -476,164 +442,6 @@ public class Util {
         catch (ParseException e) {
             throw new IllegalArgumentException("Time/date not in " + ISO_DATE_FORMAT +
                     " format: " + timeStr);
-        }
-    }
-
-    /**
-     * Various DOM utility functions.
-     */
-    public static class Xml {
-        private static final ErrorHandler eh = new ErrorHandler() {
-            public void error(SAXParseException exception) throws SAXException {
-                throw exception;
-            }
-            public void fatalError(SAXParseException exception) throws SAXException {
-                throw exception;
-            }
-            public void warning(SAXParseException exception) throws SAXException {
-                throw exception;
-            }
-        };
-
-        private Xml() {
-
-        }
-
-        public static Node[] getChildNodes(Node parentNode) {
-            return getChildNodes(parentNode, null);
-        }
-
-        public static Node[] getChildNodes(Node parentNode, String childName) {
-            ArrayList<Node> nodes = new ArrayList<Node>();
-            NodeList nodeList = parentNode.getChildNodes();
-            for (int i = 0; i < nodeList.getLength(); i++) {
-                Node node = nodeList.item(i);
-                if (node.getNodeType() == Node.ELEMENT_NODE && (childName == null || node.getNodeName().equals(childName))) {
-                    nodes.add(node);
-                }
-            }
-            return nodes.toArray(new Node[0]);
-        }
-
-        public static Node getFirstChildNode(Node parentNode, String childName) {
-            Node[] childs = getChildNodes(parentNode, childName);
-            if (childs.length > 0) {
-                return childs[0];
-            }
-            throw new IllegalArgumentException("XML Error, no such child: " + childName);
-        }
-
-        public static boolean hasChildNode(Node parentNode, String childName) {
-            Node[] childs = getChildNodes(parentNode, childName);
-            return childs.length > 0;
-        }
-
-        // -- Wrapper around getChildValue with trim
-        public static String getChildValue(Node parentNode, String childName) {
-            return getChildValue(parentNode, childName, true);
-        }
-
-        public static String getChildValue(Node parentNode, String childName, boolean trim) {
-            NodeList children = parentNode.getChildNodes();
-            for (int i = 0; i < children.getLength(); i++) {
-                Node child = children.item(i);
-                if (child.getNodeName().equals(childName)) {
-                    return getValue(child, trim);
-                }
-            }
-            throw new IllegalStateException("XML Error, no such child: " + childName);
-        }
-
-        // -- Wrapper around getValue with trim
-        public static String getValue(Node node) {
-            return getValue(node, true);
-        }
-
-        public static String getValue(Node node, boolean trimValue) {
-            String value = null;
-            Node child = node.getFirstChild();
-            if (child != null) {
-                value = child.getNodeValue();
-                if (value != null && trimValue) {
-                    value = value.trim();
-                }
-            }
-            return value;
-        }
-
-        public static int getChildValueAsInt(Node parentNode, String childName) {
-            String valueStr = getChildValue(parentNode, childName);
-            return Integer.parseInt(valueStr);
-        }
-
-        public static int getValueAsInt(Node node) {
-            String valueStr = getValue(node);
-            return Integer.parseInt(valueStr);
-        }
-
-        public static long getChildValueAsLong(Node parentNode, String childName) {
-            String valueStr = getChildValue(parentNode, childName);
-            return Long.parseLong(valueStr);
-        }
-
-        public static long getValueAsLong(Node node) {
-            String valueStr = getValue(node);
-            return Long.parseLong(valueStr);
-        }
-
-        public static double getChildValueAsDouble(Node parentNode, String childName) {
-            String valueStr = getChildValue(parentNode, childName);
-            return Util.parseDouble(valueStr);
-        }
-
-        public static double getValueAsDouble(Node node) {
-            String valueStr = getValue(node);
-            return Util.parseDouble(valueStr);
-        }
-
-        public static boolean getChildValueAsBoolean(Node parentNode, String childName) {
-            String valueStr = getChildValue(parentNode, childName);
-            return Util.parseBoolean(valueStr);
-        }
-
-        public static boolean getValueAsBoolean(Node node) {
-            String valueStr = getValue(node);
-            return Util.parseBoolean(valueStr);
-        }
-
-        public static Element getRootElement(InputSource inputSource) throws IOException {
-            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-            factory.setValidating(false);
-            factory.setNamespaceAware(false);
-            try {
-                DocumentBuilder builder = factory.newDocumentBuilder();
-                builder.setErrorHandler(eh);
-                Document doc = builder.parse(inputSource);
-                return doc.getDocumentElement();
-            }
-            catch (ParserConfigurationException e) {
-                throw new RuntimeException(e.getMessage(), e);
-            }
-            catch (SAXException e) {
-                throw new RuntimeException(e.getMessage(), e);
-            }
-        }
-
-        public static Element getRootElement(String xmlString) throws IOException {
-            return getRootElement(new InputSource(new StringReader(xmlString)));
-        }
-
-        public static Element getRootElement(File xmlFile) throws IOException {
-            Reader reader = null;
-            try {
-                reader = new FileReader(xmlFile);
-                return getRootElement(new InputSource(reader));
-            }
-            finally {
-                if (reader != null) {
-                    reader.close();
-                }
-            }
         }
     }
 

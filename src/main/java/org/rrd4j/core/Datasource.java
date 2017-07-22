@@ -259,20 +259,6 @@ public class Datasource implements RrdUpdater {
         return totalValue;
     }
 
-    void appendXml(XmlWriter writer) throws IOException {
-        writer.startTag("ds");
-        writer.writeTag("name", dsName.get());
-        writer.writeTag("type", dsType.get());
-        writer.writeTag("minimal_heartbeat", heartbeat.get());
-        writer.writeTag("min", minValue.get());
-        writer.writeTag("max", maxValue.get());
-        writer.writeComment("PDP Status");
-        writer.writeTag("last_ds", lastValue.get(), "UNKN");
-        writer.writeTag("value", accumValue.get());
-        writer.writeTag("unknown_sec", nanSeconds.get());
-        writer.closeTag();  // ds
-    }
-
     /**
      * {@inheritDoc}
      *

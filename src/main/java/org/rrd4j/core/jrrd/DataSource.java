@@ -134,39 +134,6 @@ public class DataSource {
         s.println(pdpStatusBlock.unknownSeconds);
     }
 
-    void toXml(PrintStream s) {
-
-        s.println("\t<ds>");
-        s.print("\t\t<name> ");
-        s.print(name);
-        s.println(" </name>");
-        s.print("\t\t<type> ");
-        s.print(type);
-        s.println(" </type>");
-        s.print("\t\t<minimal_heartbeat> ");
-        s.print(minimumHeartbeat);
-        s.println(" </minimal_heartbeat>");
-        s.print("\t\t<min> ");
-        s.print(minimum);
-        s.println(" </min>");
-        s.print("\t\t<max> ");
-        s.print(maximum);
-        s.println(" </max>");
-        s.println();
-        s.println("\t\t<!-- PDP Status -->");
-        s.print("\t\t<last_ds> ");
-        s.print(pdpStatusBlock.lastReading);
-        s.println(" </last_ds>");
-        s.print("\t\t<value> ");
-        s.print(pdpStatusBlock.value);
-        s.println(" </value>");
-        s.print("\t\t<unknown_sec> ");
-        s.print(pdpStatusBlock.unknownSeconds);
-        s.println(" </unknown_sec>");
-        s.println("\t</ds>");
-        s.println();
-    }
-
     /**
      * Returns a summary the contents of this data source.
      *

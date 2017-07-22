@@ -335,34 +335,6 @@ public class Archive implements RrdUpdater {
         return fetchData;
     }
 
-    void appendXml(XmlWriter writer) throws IOException {
-        writer.startTag("rra");
-        writer.writeTag("cf", consolFun.get());
-        writer.writeComment(getArcStep() + " seconds");
-        writer.writeTag("pdp_per_row", steps.get());
-        writer.startTag("params");
-        writer.writeTag("xff", xff.get());
-        writer.closeTag(); // params
-        writer.startTag("cdp_prep");
-        for (ArcState state : states) {
-            state.appendXml(writer);
-        }
-        writer.closeTag(); // cdp_prep
-        writer.startTag("database");
-        long startTime = getStartTime();
-        for (int i = 0; i < rows.get(); i++) {
-            long time = startTime + i * getArcStep();
-            writer.writeComment(Util.getDate(time) + " / " + time);
-            writer.startTag("row");
-            for (Robin robin : robins) {
-                writer.writeTag("v", robin.getValue(i));
-            }
-            writer.closeTag(); // row
-        }
-        writer.closeTag(); // database
-        writer.closeTag(); // rra
-    }
-
     /**
      * {@inheritDoc}
      *

@@ -71,13 +71,6 @@ public class ArcState implements RrdUpdater {
         return parentArc;
     }
 
-    void appendXml(XmlWriter writer) throws IOException {
-        writer.startTag("ds");
-        writer.writeTag("value", accumValue.get());
-        writer.writeTag("unknown_datapoints", nanSteps.get());
-        writer.closeTag(); // ds
-    }
-
     /**
      * {@inheritDoc}
      *

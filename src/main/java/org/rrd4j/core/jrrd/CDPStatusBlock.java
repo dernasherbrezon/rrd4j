@@ -58,14 +58,6 @@ public class CDPStatusBlock {
         return value;
     }
 
-    void toXml(PrintStream s) {
-        s.print("\t\t\t<ds><value> ");
-        s.print(value);
-        s.print(" </value>  <unknown_datapoints> ");
-        s.print(unknownDatapoints);
-        s.println(" </unknown_datapoints></ds>");
-    }
-
     /**
      * Returns a summary the contents of this CDP status block.
      *

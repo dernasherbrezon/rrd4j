@@ -160,15 +160,6 @@ public class Header implements RrdUpdater {
                 " arcCount:" + getArcCount() + "\n";
     }
 
-    void appendXml(XmlWriter writer) throws IOException {
-        writer.writeComment(signature.get());
-        writer.writeTag("version", RRDTOOL_VERSION3);
-        writer.writeComment("Seconds");
-        writer.writeTag("step", step.get());
-        writer.writeComment(Util.getDate(lastUpdateTime.get()));
-        writer.writeTag("lastupdate", lastUpdateTime.get());
-    }
-
     /**
      * {@inheritDoc}
      *
