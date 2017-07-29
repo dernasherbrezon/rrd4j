@@ -5,7 +5,7 @@
 
 	<groupId>com.aerse</groupId>
 	<artifactId>rrd4j-light</artifactId>
-	<version>3.3</version>
+	<version>3.4-SNAPSHOT</version>
 
 	<name>RRD4J-light</name>
 	<packaging>jar</packaging>
