@@ -7,10 +7,10 @@
     <artifactId>rrd4j-light</artifactId>
     <version>3.2-SNAPSHOT</version>
 
-    <name>RRD4J</name>
+    <name>RRD4J-light</name>
     <packaging>jar</packaging>
     <description>A high performance data logging system for time series data.</description>
-    <url>https://github.com/dernasherbrezon/rrd4j</url>
+    <url>https://github.com/dernasherbrezon/rrd4j-light</url>
     <!-- Use the Sonatype parent to be able to sync to central. -->
     <parent>
         <groupId>org.sonatype.oss</groupId>
@@ -41,9 +41,9 @@
     <scm>
         <!-- See http://maven.apache.org/plugins/maven-release-plugin/examples/perform-release.html -->
         <!-- for how to perform a release from the connection below. -->
-        <connection>scm:git:https://github.com/dernasherbrezon/rrd4j.git</connection>
-        <developerConnection>scm:git:https://github.com/dernasherbrezon/rrd4j.git</developerConnection>
-        <url>https://github.com/dernasherbrezon/rrd4j</url>
+        <connection>scm:git:https://github.com/dernasherbrezon/rrd4j-light.git</connection>
+        <developerConnection>scm:git:https://github.com/dernasherbrezon/rrd4j-light.git</developerConnection>
+        <url>https://github.com/dernasherbrezon/rrd4j-light</url>
     </scm>
     <dependencies>
         <!-- Dependencies for optional backends should have optional=true. -->
