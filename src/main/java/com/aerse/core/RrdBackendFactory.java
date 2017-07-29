@@ -266,7 +266,7 @@ public abstract class RrdBackendFactory {
      * Try to detect an URI from a path. It's needed because of windows path that look's like an URI
      * and to URL-encode the path.
      * 
-     * @param rrdpath
+     * @param rrdpath - path
      * @return an URI
      */
     public static URI buildGenericUri(String rrdpath) {
@@ -326,8 +326,9 @@ public abstract class RrdBackendFactory {
      * <li>query and fragment is kept as is.
      * </ul>
      * 
-     * @param rootUri
-     * @param uri
+     * @param rootUri - root uri
+     * @param uri - uri
+     * @param relative - relative
      * @return a calculate normalized absolute URI or null if the tried URL don't match against the root.
      */
     protected URI resolve(URI rootUri, URI uri, boolean relative) {
@@ -380,8 +381,8 @@ public abstract class RrdBackendFactory {
     /**
      * Transform an path in a valid URI for ths backend.
      * 
-     * @param path
-     * @return
+     * @param path - path
+     * @return uri
      */
     public URI getUri(String path) {
         URI rootUri = getRootUri();

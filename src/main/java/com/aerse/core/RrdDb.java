@@ -13,7 +13,7 @@ import com.aerse.ConsolFun;
  * Main class used to create and manipulate round robin databases (RRDs). Use
  * this class to perform update and fetch operations on existing RRDs, to create
  * new RRD from the definition (object of class {@link com.aerse.core.RrdDef
- * RrdDef}) or from XML file (dumped content of RRDTool's or Rrd4j's RRD file).
+ * RrdDef}).
  * </p>
  * <p>
  * Each RRD is backed with some kind of storage. For example, RRDTool supports
@@ -410,10 +410,6 @@ public class RrdDb implements RrdUpdater, Closeable {
 	 * RrdDb rrd = new RrdDb(&quot;copy.rrd&quot;, &quot;xml:/original.xml&quot;);
 	 * </pre>
 	 * <p>
-	 * See documentation for {@link #dumpXml(String) dumpXml()} method to see
-	 * how to convert Rrd4j files to RRDTool's format.
-	 * </p>
-	 * <p>
 	 * To read RRDTool files directly, specify <code>rrdtool:/</code> prefix in
 	 * the <code>externalPath</code> argument. For example, to create Rrd4j
 	 * compatible file named <code>copy.rrd</code> from the file
@@ -481,10 +477,6 @@ public class RrdDb implements RrdUpdater, Closeable {
 	 * RrdDb rrd = new RrdDb(&quot;copy.rrd&quot;, &quot;xml:/original.xml&quot;);
 	 * </pre>
 	 * <p>
-	 * See documentation for {@link #dumpXml(String) dumpXml()} method to see
-	 * how to convert Rrd4j files to RRDTool's format.
-	 * </p>
-	 * <p>
 	 * To read RRDTool files directly, specify <code>rrdtool:/</code> prefix in
 	 * the <code>externalPath</code> argument. For example, to create Rrd4j
 	 * compatible file named <code>copy.rrd</code> from the file
@@ -546,10 +538,6 @@ public class RrdDb implements RrdUpdater, Closeable {
 	 * <pre>
 	 * RrdDb rrd = new RrdDb(&quot;copy.rrd&quot;, &quot;xml:/original.xml&quot;);
 	 * </pre>
-	 * <p>
-	 * See documentation for {@link #dumpXml(String) dumpXml()} method to see
-	 * how to convert Rrd4j files to RRDTool's format.
-	 * </p>
 	 * <p>
 	 * To read RRDTool files directly, specify <code>rrdtool:/</code> prefix in
 	 * the <code>externalPath</code> argument. For example, to create Rrd4j
