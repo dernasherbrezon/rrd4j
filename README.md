@@ -33,9 +33,9 @@ Add this dependency to your project's POM file:
 ### Usage Example
 
 ```java
-import org.rrd4j.core.*;
-import static org.rrd4j.DsType.*;
-import static org.rrd4j.ConsolFun.*;
+import com.aerse.core.*;
+import static com.aerse.DsType.*;
+import static com.aerse.ConsolFun.*;
 ...
 // first, define the RRD
 RrdDef rrdDef = new RrdDef(rrdPath, 300);
@@ -55,7 +55,7 @@ while (...) {
 rrdDb.close();
 ```
 
-Go through the source of [Demo](https://github.com/dernasherbrezon/rrd4j/blob/master/src/main/java/org/rrd4j/demo/Demo.java) for more examples.
+Go through the source of [Demo](https://github.com/dernasherbrezon/rrd4j/blob/master/src/test/java/com/aerse/demo/Demo.java) for more examples.
 
 ### Supported Backends
 

@@ -9,7 +9,7 @@
 
     <name>RRD4J</name>
     <packaging>jar</packaging>
-    <description>A high performance data logging and graphing system for time series data.</description>
+    <description>A high performance data logging system for time series data.</description>
     <url>https://github.com/dernasherbrezon/rrd4j</url>
     <!-- Use the Sonatype parent to be able to sync to central. -->
     <parent>
@@ -100,96 +100,7 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>2.6</version>
-                <executions>
-                    <execution>
-                        <id>default-jar</id>
-                        <configuration>
-                            <excludes>
-                                <!-- Exclude the converter and inspector 
-                                    from the default build. -->
-                                <exclude>**/converter/</exclude>
-                                <exclude>**/inspector/</exclude>
-                                <exclude>**/demo/</exclude>
-                                <!-- Exclude images used in the inspector 
-                                    only. -->
-                                <exclude>*.gif</exclude>
-                                <exclude>*.png</exclude>
-                            </excludes>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>converter</id>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                        <configuration>
-                            <classifier>converter</classifier>
-                            <includes>
-                                <include>**/converter/*</include>
-                            </includes>
-                            <archive>
-                                <manifest>
-                                    <mainClass>org.rrd4j.converter.Converter</mainClass>
-                                </manifest>
-                                <manifestEntries>
-                                    <!-- Resolves to the default jar file. -->
-                                    <Class-Path>${project.build.finalName}.jar</Class-Path>
-                                </manifestEntries>
-                            </archive>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>inspector</id>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                        <configuration>
-                            <classifier>inspector</classifier>
-                            <includes>
-                                <include>**/inspector/*</include>
-                                <include>*.gif</include>
-                                <include>*.png</include>
-                            </includes>
-                            <archive>
-                                <manifest>
-                                    <mainClass>com.aerse.inspector.RrdInspector</mainClass>
-                                </manifest>
-                                <manifestEntries>
-                                    <!-- Resolves to the default jar file. -->
-                                    <Class-Path>${project.build.finalName}.jar</Class-Path>
-                                </manifestEntries>
-                            </archive>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>demo</id>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                        <configuration>
-                            <classifier>demo</classifier>
-                            <includes>
-                                <include>**/demo/*</include>
-                            </includes>
-                            <archive>
-                                <manifest>
-                                    <mainClass>com.aerse.demo.Demo</mainClass>
-                                </manifest>
-                                <manifestEntries>
-                                    <!-- Resolves to the default jar file. -->
-                                    <Class-Path>${project.build.finalName}.jar</Class-Path>
-                                </manifestEntries>
-                            </archive>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>${maven.plugin.javadoc.version}</version>
                 <executions>
                     <execution>
                         <id>attach-javadocs</id>
@@ -217,31 +128,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
-                <version>2.5.2</version>
-            </plugin>
-            <plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.7.7.201606060606</version>
-                <configuration>
-                    <destfile>${basedir}/target/coverage-reports/jacoco-unit.exec</destfile>
-                    <datafile>${basedir}/target/coverage-reports/jacoco-unit.exec</datafile>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>jacoco-initialize</id>
-                        <goals>
-                            <goal>prepare-agent</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>jacoco-site</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>report</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
         <pluginManagement>
@@ -317,57 +203,7 @@
             </plugins>
         </pluginManagement>
     </build>
-    <reporting>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-project-info-reports-plugin</artifactId>
-                <version>2.8</version>
-            </plugin>
-            <plugin>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>${maven.plugin.javadoc.version}</version>
-                <configuration>
-                    <quiet>false</quiet>
-                    <detectJavaApiLink>true</detectJavaApiLink>
-                    <show>protected</show>
-                    <bottom><![CDATA[
-                        <p>&copy; ${year} The RRD4J Authors. &copy; 2001-2005 Sasa Markovic and Ciaran Treanor. &copy; ${year} The OpenNMS Group, Inc.</p>
-                        ]]>
-                    </bottom>
-                    <links>
-                        <link>http://docs.oracle.com/javase/7/docs/api/</link>
-                        <link>http://api.mongodb.org/java/2.0/</link>
-                        <link>http://docs.oracle.com/cd/E17277_02/html/java/</link>
-                        <link>http://junit.sourceforge.net/javadoc/</link>
-                    </links>
-                </configuration>
-                <reportSets>
-                    <reportSet>
-                        <id>javadoc-report</id>
-                        <reports>
-                            <report>javadoc</report>
-                        </reports>
-                    </reportSet>
-                </reportSets>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-report-plugin</artifactId>
-                <version>${maven.plugin.surefire.version}</version>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>findbugs-maven-plugin</artifactId>
-                <version>3.0.1</version>
-                <configuration>
-                    <findbugsXmlOutput>true</findbugsXmlOutput>
-                    <findbugsXmlWithMessages>true</findbugsXmlWithMessages>
-                    <xmlOutput>true</xmlOutput>
-                </configuration>
-            </plugin>
-        </plugins>
-    </reporting>
+
     <developers>
         <developer>
             <id>dernasherbrezon</id>
