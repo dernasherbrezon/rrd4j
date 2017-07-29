@@ -1,22 +1,13 @@
-rrd4j <a href='http://jrds.fr/jenkins/job/rrd4j/'><img src='http://jrds.fr/jenkins/job/rrd4j/badge/icon?file=.png' /></a>
+rrd4j-light
 =====
 
-RRD4J is a high performance data logging and graphing system for time series data, implementing [RRDTool's](http://oss.oetiker.ch/rrdtool/)
-functionality in Java. It follows much of the same logic and uses the same data sources, archive types and definitions as RRDTool does.
+This is hard fork of the original [rrd4j](https://github.com/rrd4j/rrd4j). This library supports only reading and writing rrd files.
 
-RRD4J supports all standard operations on Round Robin Database (RRD) files: `CREATE`, `UPDATE`, `FETCH`, `LAST`, `DUMP`, `EXPORT` and `GRAPH`.
-RRD4J's API is made for those who are familiar with [RRDTool's](http://oss.oetiker.ch/rrdtool/) concepts and logic, but prefer to
-work with pure Java (no native functions or libraries, no Runtime.exec(), RRDTool does not have to be present). We help out our
-users [here](https://groups.google.com/forum/#!forum/rrd4j-discuss).
+Original rrd4j library has support for:
+- use XML for backend (org.w3c.dom.*)
+- render graphs (java.awt.*)
 
-### Latest Version (requires Java 7+)
-
-RRD4J 3.1 (released 2017-01-01) - [Download](https://github.com/rrd4j/rrd4j/releases) - [Changelog](https://raw.githubusercontent.com/rrd4j/rrd4j/master/changelog.txt)
-
-### Building (optional)
-
-RRD4J is built using Maven. The generated site is available [here](http://rrd4j.org/site). Automated builds are uploaded
-to [Sonatype's repository](https://oss.sonatype.org/content/repositories/snapshots/org/rrd4j/rrd4j).
+Unfortunately these APIs are not included into the Java 8 Embedded compact1 profile.
 
 ### Using with Maven
 
@@ -24,9 +15,9 @@ Add this dependency to your project's POM file:
 
 ```xml
 <dependency>
-	<groupId>org.rrd4j</groupId>
-	<artifactId>rrd4j</artifactId>
-	<version>3.1</version>
+	<groupId>com.aerse</groupId>
+	<artifactId>rrd4j-light</artifactId>
+	<version>3.2</version>
 </dependency>
 ```
 
@@ -62,26 +53,9 @@ while (...) {
     sample.update();
 }
 rrdDb.close();
-
-// then create a graph definition
-RrdGraphDef gDef = new RrdGraphDef();
-gDef.setWidth(500);
-gDef.setHeight(300);
-gDef.setFilename(imgPath);
-gDef.setStartTime(start);
-gDef.setEndTime(end);
-gDef.setTitle("My Title");
-gDef.setVerticalLabel("bytes");
-
-gDef.datasource("bytes", "myrrdpath", "inbytes", AVERAGE);
-gDef.hrule(2568, Color.GREEN, "hrule");
-gDef.setImageFormat("png");
-
-// then actually draw the graph
-RrdGraph graph = new RrdGraph(gDef); // will create the graph in the path specified
 ```
 
-Go through the source of [Demo](https://github.com/rrd4j/rrd4j/blob/master/src/main/java/org/rrd4j/demo/Demo.java) for more examples.
+Go through the source of [Demo](https://github.com/dernasherbrezon/rrd4j/blob/master/src/main/java/org/rrd4j/demo/Demo.java) for more examples.
 
 ### Supported Backends
 

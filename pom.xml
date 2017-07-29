@@ -2,13 +2,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.rrd4j</groupId>
-    <artifactId>rrd4j</artifactId>
+
+    <groupId>com.aerse</groupId>
+    <artifactId>rrd4j-light</artifactId>
+    <version>3.2-SNAPSHOT</version>
+
     <name>RRD4J</name>
     <packaging>jar</packaging>
-    <version>3.2-SNAPSHOT</version>
     <description>A high performance data logging and graphing system for time series data.</description>
-    <url>https://github.com/rrd4j/rrd4j/</url>
+    <url>https://github.com/dernasherbrezon/rrd4j</url>
     <!-- Use the Sonatype parent to be able to sync to central. -->
     <parent>
         <groupId>org.sonatype.oss</groupId>
@@ -39,9 +41,9 @@
     <scm>
         <!-- See http://maven.apache.org/plugins/maven-release-plugin/examples/perform-release.html -->
         <!-- for how to perform a release from the connection below. -->
-        <connection>scm:git:https://github.com/rrd4j/rrd4j.git</connection>
-        <developerConnection>scm:git:https://github.com/rrd4j/rrd4j.git</developerConnection>
-        <url>https://github.com/rrd4j/rrd4j/</url>
+        <connection>scm:git:https://github.com/dernasherbrezon/rrd4j.git</connection>
+        <developerConnection>scm:git:https://github.com/dernasherbrezon/rrd4j.git</developerConnection>
+        <url>https://github.com/dernasherbrezon/rrd4j</url>
     </scm>
     <dependencies>
         <!-- Dependencies for optional backends should have optional=true. -->
@@ -152,7 +154,7 @@
                             </includes>
                             <archive>
                                 <manifest>
-                                    <mainClass>org.rrd4j.inspector.RrdInspector</mainClass>
+                                    <mainClass>com.aerse.inspector.RrdInspector</mainClass>
                                 </manifest>
                                 <manifestEntries>
                                     <!-- Resolves to the default jar file. -->
@@ -173,7 +175,7 @@
                             </includes>
                             <archive>
                                 <manifest>
-                                    <mainClass>org.rrd4j.demo.Demo</mainClass>
+                                    <mainClass>com.aerse.demo.Demo</mainClass>
                                 </manifest>
                                 <manifestEntries>
                                     <!-- Resolves to the default jar file. -->
@@ -368,17 +370,9 @@
     </reporting>
     <developers>
         <developer>
-            <name>Sasa Markovic</name>
-        </developer>
-        <developer>
-            <id>mathias.bogaert</id>
-            <name>Mathias Bogaert</name>
-            <email>mathias.bogaert@gmail.com</email>
-        </developer>
-        <developer>
-            <id>fbacchella</id>
-            <name>Fabrice Bacchella</name>
-            <email>fbacchella@spamcop.net</email>
+            <id>dernasherbrezon</id>
+            <name>dernasherbrezon</name>
+            <email>dernasherbrezon@gmail.com</email>
         </developer>
     </developers>
 </project>
