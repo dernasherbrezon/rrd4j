@@ -6,8 +6,6 @@ import java.nio.channels.FileChannel;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
-import sun.nio.ch.DirectBuffer;
-
 /**
  * Backend which is used to store RRD data to ordinary disk files
  * using java.nio.* package. This is the default backend engine.
@@ -69,9 +67,6 @@ public class RrdNioBackend extends RrdRandomAccessFileBackend {
 
     private void unmapFile() {
         if (byteBuffer != null) {
-            if (byteBuffer instanceof DirectBuffer) {
-                ((DirectBuffer) byteBuffer).cleaner().clean();
-            }
             byteBuffer = null;
         }
     }
