@@ -1,4 +1,6 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.aerse</groupId>
 	<artifactId>rrd4j-light</artifactId>
@@ -6,13 +8,13 @@
 	<packaging>jar</packaging>
 	<name>RRD4J-light</name>
 	<description>A high performance data logging system for time series data.</description>
-	<inceptionYear>2017</inceptionYear>	
+	<inceptionYear>2017</inceptionYear>
 	<url>https://github.com/dernasherbrezon/rrd4j-light</url>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
-	
+
 	<dependencies>
 		<!-- Dependencies for optional backends should have optional=true. -->
 		<dependency>
@@ -53,7 +55,7 @@
 					<releaseProfiles>release</releaseProfiles>
 					<goals>deploy</goals>
 				</configuration>
-			</plugin>		
+			</plugin>
 			<plugin>
 				<groupId>org.sonatype.plugins</groupId>
 				<artifactId>nexus-staging-maven-plugin</artifactId>
@@ -64,7 +66,7 @@
 					<nexusUrl>https://oss.sonatype.org/</nexusUrl>
 					<autoReleaseAfterClose>true</autoReleaseAfterClose>
 				</configuration>
-			</plugin>		
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
@@ -78,11 +80,11 @@
 						</goals>
 					</execution>
 				</executions>
-			</plugin>			
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-gpg-plugin</artifactId>
-				<version>1.5</version>
+				<version>1.6</version>
 				<executions>
 					<execution>
 						<id>sign-artifacts</id>
@@ -90,9 +92,13 @@
 						<goals>
 							<goal>sign</goal>
 						</goals>
-   					</execution>
+						<configuration>
+							<keyname>6B2EEAD3</keyname>
+							<passphraseServerId>gpg.passphrase</passphraseServerId>
+						</configuration>
+					</execution>
 				</executions>
-			</plugin>					
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
@@ -105,7 +111,7 @@
 						</goals>
 					</execution>
 				</executions>
-			</plugin>		
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-install-plugin</artifactId>
@@ -113,7 +119,7 @@
 				<configuration>
 					<createChecksum>true</createChecksum>
 				</configuration>
-			</plugin>		
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -129,7 +135,7 @@
 				<configuration>
 					<encoding>UTF-8</encoding>
 				</configuration>
-			</plugin>			
+			</plugin>
 		</plugins>
 	</build>
 
@@ -139,7 +145,7 @@
 			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
 		</license>
 	</licenses>
-	
+
 	<developers>
 		<developer>
 			<id>DErNasherBrezon</id>
@@ -152,21 +158,21 @@
 		<url>https://github.com/dernasherbrezon/rrd4j-light</url>
 		<connection>scm:git:git@github.com/dernasherbrezon/rrd4j-light.git</connection>
 		<developerConnection>scm:git:https://github.com/dernasherbrezon/rrd4j-light.git</developerConnection>
-	  <tag>rrd4j-light-3.6</tag>
-  </scm>	
-  
+		<tag>rrd4j-light-3.8</tag>
+	</scm>
+
 	<issueManagement>
 		<system>GitHub Issues</system>
 		<url>https://github.com/dernasherbrezon/rrd4j-light/issues</url>
 	</issueManagement>
-	  
+
 	<distributionManagement>
 		<snapshotRepository>
 			<id>ossrh</id>
 			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
 		</snapshotRepository>
 	</distributionManagement>
-	
+
 
 
 </project>
