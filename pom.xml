@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.aerse</groupId>
 	<artifactId>rrd4j-light</artifactId>
-	<version>3.8</version>
+	<version>3.9-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<name>RRD4J-light</name>
 	<description>A high performance data logging system for time series data.</description>
